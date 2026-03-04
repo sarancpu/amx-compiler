@@ -21,8 +21,6 @@ def run_code():
     user_input = data.get("input", "")
     language = data.get("language", "python")
 
-    print("LANGUAGE =", language)
-
     start_time = time.time()
 
     try:
@@ -35,7 +33,7 @@ def run_code():
                 src = f.name
 
             r = subprocess.run(
-                ["python", src],
+                ["python3", src],
                 input=user_input,
                 capture_output=True,
                 text=True,
@@ -45,7 +43,6 @@ def run_code():
             output = r.stdout + r.stderr
             os.remove(src)
 
-
         # ---------- C ----------
         elif language == "c":
 
@@ -53,7 +50,7 @@ def run_code():
                 f.write(code.encode())
                 src = f.name
 
-            exe = src.replace(".c", ".exe")
+            exe = src.replace(".c", "")
 
             compile_res = subprocess.run(
                 ["gcc", src, "-o", exe],
@@ -79,7 +76,6 @@ def run_code():
             if os.path.exists(exe):
                 os.remove(exe)
 
-
         # ---------- C++ ----------
         elif language == "cpp":
 
@@ -87,7 +83,7 @@ def run_code():
                 f.write(code.encode())
                 src = f.name
 
-            exe = src.replace(".cpp", ".exe")
+            exe = src.replace(".cpp", "")
 
             compile_res = subprocess.run(
                 ["g++", src, "-o", exe],
@@ -112,7 +108,6 @@ def run_code():
             os.remove(src)
             if os.path.exists(exe):
                 os.remove(exe)
-
 
         # ---------- JAVA ----------
         elif language == "java":
@@ -151,7 +146,6 @@ def run_code():
 
                     output = run_res.stdout + run_res.stderr
 
-
         # ---------- JAVASCRIPT ----------
         elif language == "javascript":
 
@@ -170,7 +164,6 @@ def run_code():
             output = r.stdout + r.stderr
             os.remove(src)
 
-
         else:
             output = "Unsupported language selected"
 
@@ -186,5 +179,6 @@ def run_code():
     })
 
 
+# Render production run
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
