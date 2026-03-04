@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    cursor: pointer;
+}
+
+/* FILE BAR */
+.filebar {
+    padding: 6px 16px;
+    background: #f1f5f9;
+    border-bottom: 1px solid #ddd;
+}
+
+/* MAIN */
+.main {
+    display: flex;
+    height: calc(100vh - 90px);
+}
+
+/* EDITOR */
+#code {
+    width: 60%;
+    border: none;
+    padding: 12px;
+    font-family: monospace;
+}
+
+/* RIGHT PANEL */
+.right {
+    width: 40%;
+    padding: 10px;
+    border-left: 1px solid #ddd;
+}
+
+pre {
+    background: #0f172a;
+    color: #22c55e;
+    padding: 10px;
+    height: 200px;
+}
+
+#terminal {
+    background: black;
+    color: lime;
+    height: 300px;
+    padding: 10px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    outline: none;
+    border: 1px solid #333;
+}
+
+.tabs{
+    display:flex;
+    background:#1e1e1e;
+    color:white;
+}
+
+.tab{
+    padding:8px 15px;
+    cursor:pointer;
+    border-right:1px solid #333;
+}
+
+.tab.active{
+    background:#333;
+}
+
+.add-tab{
+    font-weight:bold;
+}
