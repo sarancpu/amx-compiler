@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AMX Compiler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        #editor {
+            height: 400px;
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+
+        #inputBox{
+            width:100%;
+            height:80px;
+            padding:8px;
+            font-family: monospace;
+            border:1px solid #333;
+            resize:none;
+        }
+
+        #terminal {
+            background: black;
+            color: lime;
+            height: 200px;
+            padding: 10px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            outline: none;
+            border: 1px solid #333;
+        }
+
+        #htmlPreview {
+            display: none;
+            width: 100%;
+            height: 300px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">&lt;/&gt; AMX Compiler</div>
+
+    <div class="actions">
+        <select id="language">
+            <option value="python">PYTHON</option>
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+            <option value="java">JAVA</option>
+            <option value="javascript">JAVASCRIPT</option>
+            <option value="html">HTML</option>
+        </select>
+
+        <button onclick="runCode()">RUN ▶</button>
+        <button onclick="toggleTheme()">THEME</button>
+    </div>
+</div>
+<div class="tabs" id="tabs">
+
+    <div class="tab active" data-file="main.py" onclick="switchTab('main.py')">
+        main.py
+    </div>
+
+    <div class="tab add-tab" onclick="createTab()">
+        +
+    </div>
+
+</div>
+
+<!-- FILE BAR -->
+<div class="filebar" id="filename">main.py</div>
+
+<!-- MAIN AREA -->
+<div class="main">
+
+    <!-- MONACO EDITOR -->
+    <div id="editor"></div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right">
+
+        <!-- INPUT PANEL -->
+        <h4>Input</h4>
+        <textarea id="inputBox" placeholder="Enter program input here..."></textarea>
+
+        <!-- OUTPUT PANEL -->
+        <h4>Terminal</h4>
+        <div id="terminal"></div>
+
+        <!-- HTML PREVIEW -->
+        <iframe id="htmlPreview"></iframe>
+
+    </div>
+</div>
+
+<!-- MONACO CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+
+<script>
+require.config({
+    paths: {
+        'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs'
+    }
+});
+
+require(['vs/editor/editor.main'], function () {
+
+    window.editor = monaco.editor.create(
+        document.getElementById('editor'),
+        {
+            value: `print("Enter your name:")
+name = input()
+print("Hello", name)`,
+            language: 'python',
+            theme: 'vs-dark',
+            automaticLayout: true,
+            fontSize: 14
+        }
+    );
+
+});
+</script>
+
+<!-- MAIN SCRIPT -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<button onclick="clearTerminal()">CLEAR</button>
+<button onclick="downloadCode()">DOWNLOAD</button>
+<input type="file" onchange="openFile(event)">
+
